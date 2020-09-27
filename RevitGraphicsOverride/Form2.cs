@@ -19,6 +19,7 @@ namespace RevitGraphicsOverride
     public partial class Form2 : Form
     {
         public int idToSelect;
+        public int idViewToOpen;
 
         public Form2(Dictionary<string, List<OverridenResult>> resultsOnSheets)
         {
@@ -32,8 +33,11 @@ namespace RevitGraphicsOverride
         private void treeListView_CellDoubleClick(object sender, MouseEventArgs e)
         {
             BrightIdeasSoftware.OLVListItem curRow = this.treeListView.SelectedItem;
-            var i = curRow.GetSubItem(1);
-            idToSelect = int.Parse(i.Text);
+            var idElemCell = curRow.GetSubItem(1);
+            idToSelect = int.Parse(idElemCell.Text);
+
+            var idViewCell = curRow.GetSubItem(3);
+            idViewToOpen = int.Parse(idViewCell.Text);
 
             this.DialogResult = DialogResult.Yes;
             this.Close();
@@ -48,12 +52,15 @@ namespace RevitGraphicsOverride
             public string Name { get; private set; }
             public string Column1 { get; private set; }
             public string Column2 { get; private set; }
+            public string Column3 { get; private set; }
+
             public List<Node> Children { get; private set; }
-            public Node(string name, string col1, string col2)
+            public Node(string name, string col1, string col2, string col3)
             {
                 this.Name = name;
                 this.Column1 = col1;
                 this.Column2 = col2;
+                this.Column3 = col3;
                 this.Children = new List<Node>();
             }
         }
@@ -88,10 +95,14 @@ namespace RevitGraphicsOverride
             col2.AspectGetter = x => (x as Node).Column2;
             col2.Width = 500;
 
+            var col3 = new BrightIdeasSoftware.OLVColumn("ID вида", "Column3");
+            col3.AspectGetter = x => (x as Node).Column3;
+
             // add the columns to the tree
             this.treeListView.Columns.Add(nameCol);
             this.treeListView.Columns.Add(col1);
             this.treeListView.Columns.Add(col2);
+            this.treeListView.Columns.Add(col3);
 
             // set the tree roots
             this.treeListView.Roots = data;
@@ -103,13 +114,14 @@ namespace RevitGraphicsOverride
             data = new List<Node>();
             foreach (var kvp in results)
             {
-                Node parent = new Node(kvp.Key, "-", "-");
+                Node parent = new Node(kvp.Key, "-", "-", "-");
                 foreach(OverridenResult res in kvp.Value)
                 {
-                    string col0 = res.Elem.Name;
-                    string col1 = res.Elem.Id.IntegerValue.ToString();
-                    string col2 = res.description;
-                    parent.Children.Add(new Node(col0, col1, col2));
+                    string colElemName = res.Elem.Name;
+                    string colElemId = res.Elem.Id.IntegerValue.ToString();
+                    string colDescription = res.description;
+                    string colViewId = res.ParentView.Id.IntegerValue.ToString();
+                    parent.Children.Add(new Node(colElemName, colElemId, colDescription, colViewId));
                 }
                 
                 data.Add(parent);

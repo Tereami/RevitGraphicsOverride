@@ -97,6 +97,8 @@ namespace RevitGraphicsOverride
                 if(form2.DialogResult == System.Windows.Forms.DialogResult.Yes)
                 {
                     ElementId idToSelect = new ElementId(form2.idToSelect);
+                    View overrideView = doc.GetElement(new ElementId(form2.idViewToOpen)) as View;
+                    uidoc.ActiveView = overrideView;
                     uidoc.Selection.SetElementIds(new List<ElementId> { idToSelect });
                 }
             }
