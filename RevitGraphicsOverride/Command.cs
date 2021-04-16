@@ -13,6 +13,7 @@ Zuev Aleksandr, 2020, all rigths reserved.*/
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
@@ -23,6 +24,8 @@ namespace RevitGraphicsOverride
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            Debug.Listeners.Clear();
+            Debug.Listeners.Add(new RbsLogger.Logger("GraphicsOverride"));
             UIDocument uidoc = commandData.Application.ActiveUIDocument;
             Document doc = uidoc.Document;
 
@@ -30,79 +33,92 @@ namespace RevitGraphicsOverride
 
             Form1 form1 = new Form1();
             form1.ShowDialog();
-            if (form1.DialogResult != System.Windows.Forms.DialogResult.OK) return Result.Cancelled;
+            if (form1.DialogResult != System.Windows.Forms.DialogResult.OK)
+            {
+                Debug.WriteLine("Cancelled by user");
+                return Result.Cancelled;
+            }
 
-            if(form1.searchAllProject == false)
+            if (form1.searchAllProject == false)
             {
                 View curView = uidoc.ActiveView;
-
                 string title = curView.Name;
+                Debug.WriteLine("Search only current view: " + title);
+
                 string sheetNumber = curView.get_Parameter(BuiltInParameter.VIEWER_SHEET_NUMBER).AsString();
                 if (sheetNumber != "---")
                 {
                     string sheetName = curView.get_Parameter(BuiltInParameter.VIEWPORT_SHEET_NAME).AsString();
                     title = "Лист: " + sheetNumber + " - " + sheetName + "; " + curView.Name;
                 }
-
-                List< OverridenResult> overridenElems = SupportGraphics.getOverridenElemsOnView(doc, curView);
+                Debug.WriteLine("Sheet number: " + sheetNumber);
+                List<OverridenResult> overridenElems = SupportGraphics.getOverridenElemsOnView(doc, curView);
+                Debug.WriteLine("Overriden elems found: " + overridenElems.Count);
                 resultsOnSheets.Add(title, overridenElems);
             }
             else
             {
-
+                Debug.WriteLine("Searchall project");
                 List<ViewSheet> sheets = new FilteredElementCollector(doc)
                     .OfClass(typeof(ViewSheet))
                     .Cast<ViewSheet>()
                     .OrderBy(i => i.SheetNumber)
                     .ToList();
+                Debug.WriteLine("Sheets: " + sheets.Count);
 
-                foreach(ViewSheet sheet in sheets)
+                foreach (ViewSheet sheet in sheets)
                 {
+                    Debug.WriteLine("Current sheet: " + sheet.Name);
                     List<View> viewsOnSheet = sheet.GetAllPlacedViews().Select(i => doc.GetElement(i) as View).ToList();
+                    Debug.WriteLine("Views on sheet: " + viewsOnSheet.Count);
 
-                    foreach(View curView in viewsOnSheet)
+                    foreach (View curView in viewsOnSheet)
                     {
+                        Debug.WriteLine("View: " + curView.Name);
                         List<OverridenResult> overridenElemsCurSheet = SupportGraphics.getOverridenElemsOnView(doc, curView);
                         if (overridenElemsCurSheet.Count == 0) continue;
                         string title = sheet.Title + "; " + curView.Name;
-                        resultsOnSheets.Add(title, overridenElemsCurSheet); 
+                        resultsOnSheets.Add(title, overridenElemsCurSheet);
                     }
                 }
             }
-
-            if(resultsOnSheets.Count == 0)
+            Debug.WriteLine("Views with overrides: " + resultsOnSheets.Count);
+            if (resultsOnSheets.Count == 0)
             {
                 TaskDialog.Show("Отчет", "Элементы с переопределением графики не обнаружены!");
                 return Result.Cancelled;
             }
 
-            if(form1.selectElems)
+            if (form1.selectElems)
             {
+                Debug.WriteLine("Select elements");
                 List<ElementId> ids = new List<ElementId>();
-                foreach(var kvp in resultsOnSheets)
+                foreach (var kvp in resultsOnSheets)
                 {
                     List<OverridenResult> ress = kvp.Value;
                     List<ElementId> curIds = ress.Select(i => i.Elem.Id).ToList();
                     ids.AddRange(curIds);
                 }
-                    
+
                 uidoc.Selection.SetElementIds(ids);
             }
 
-            if(form1.showResults)
+            if (form1.showResults)
             {
+                Debug.WriteLine("Show window");
                 Form2 form2 = new Form2(resultsOnSheets);
                 form2.ShowDialog();
 
-                if(form2.DialogResult == System.Windows.Forms.DialogResult.Yes)
+                if (form2.DialogResult == System.Windows.Forms.DialogResult.Yes)
                 {
                     ElementId idToSelect = new ElementId(form2.idToSelect);
                     View overrideView = doc.GetElement(new ElementId(form2.idViewToOpen)) as View;
+                    Debug.WriteLine("Select by double click, id " + idToSelect.IntegerValue + ", view: " + overrideView.Name);
                     uidoc.ActiveView = overrideView;
                     uidoc.Selection.SetElementIds(new List<ElementId> { idToSelect });
                 }
             }
-
+            Debug.WriteLine("Finished");
             return Result.Succeeded;
         }
     }

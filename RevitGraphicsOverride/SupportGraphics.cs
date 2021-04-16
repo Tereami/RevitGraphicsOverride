@@ -11,6 +11,7 @@ This code is provided 'as is'. Author disclaims any implied warranty.
 Zuev Aleksandr, 2020, all rigths reserved.*/
 #endregion
 
+using System.Diagnostics;
 using System.Collections.Generic;
 using Autodesk.Revit.DB;
 
@@ -98,8 +99,7 @@ namespace RevitGraphicsOverride
 
             if (ogs.CutLinePatternId.IntegerValue != invalidId)
                 message += "Тип линии разреза. ";
-
-
+                        
             return message;
         }
 
@@ -107,6 +107,7 @@ namespace RevitGraphicsOverride
         public static List<OverridenResult> getOverridenElemsOnView(Document doc, View curView)
         {
             List<OverridenResult> overridenElems = new List<OverridenResult>();
+            Debug.WriteLine("Find overrides on view: " + curView.Name);
 
             FilteredElementCollector col = new FilteredElementCollector(doc, curView.Id);
             foreach (Element elem in col)
@@ -120,9 +121,10 @@ namespace RevitGraphicsOverride
                 {
                     OverridenResult ores = new OverridenResult(elem, curView, ogs, msg);
                     overridenElems.Add(ores);
+                    Debug.WriteLine("Overrides found for elem id: " + elem.Id.IntegerValue);
                 }
             }
-
+            Debug.WriteLine("Overriden elems found: " + overridenElems.Count);
             return overridenElems;
         }
     }
