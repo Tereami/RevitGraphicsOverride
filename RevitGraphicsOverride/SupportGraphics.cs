@@ -22,85 +22,86 @@ namespace RevitGraphicsOverride
         public static string HaveOverrides(OverrideGraphicSettings ogs)
         {
             int invalidId = OverrideGraphicSettings.InvalidPenNumber;
-            string message = "";
+            List<string> messagesList = new List<string>();
 
             if (ogs.Halftone == true)
-                message += "Полутона. ";
+                messagesList.Add(MyStrings.Halftones);
 
             if (ogs.ProjectionLineWeight != -1)
-                message += "Толщина линии проекции. ";
+                messagesList.Add(MyStrings.ProjectionLineThickness);
 
             if (ogs.ProjectionLineColor.IsValid)
-                message += "Цвет линии проекции. ";
+                messagesList.Add(MyStrings.ProjectionLineColor);
 
             if (ogs.ProjectionLinePatternId.IntegerValue != invalidId)
-                message += "Тип линии проекции. ";
+                messagesList.Add(MyStrings.ProjectionLinePattern);
 
 #if R2017 || R2018
             if (ogs.IsProjectionFillPatternVisible == false)
-                message += "Отключена штриховка поверхности. ";
-            
+                messagesList.Add(MyStrings.SurfaceHatchDisable);
+
             if (ogs.ProjectionFillColor.IsValid)
-                message += "Цвет штриховки поверхности. ";
+                messagesList.Add(MyStrings.SurfaceHatchColor);
 
             if (ogs.ProjectionFillPatternId.IntegerValue != invalidId)
-                message += "Штриховка поверхности. ";
+                messagesList.Add(MyStrings.SurfaceHatchPattern);
 
             if (ogs.IsCutFillPatternVisible == false)
-                message += "Отключена штриховка разреза. ";
+                messagesList.Add(MyStrings.SectionHatchDisable);
 
             if (ogs.CutFillColor.IsValid)
-                message += "Цвет штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionHatchColor);
 
             if (ogs.CutFillPatternId.IntegerValue != invalidId)
-                message += "Образец штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionHatchPattern);
 
 #else
             if (ogs.IsSurfaceForegroundPatternVisible == false)
-                message += "Отключена штриховка передней поверхности. ";
+                messagesList.Add(MyStrings.SurfaceForegroundHatchDisable);
             if (ogs.IsSurfaceBackgroundPatternVisible == false)
-                message += "Отключена штриховка задней поверхности. ";
- 
-            if(ogs.SurfaceForegroundPatternColor.IsValid)
-                message += "Цвет штриховки передней поверхности. ";
-            if (ogs.SurfaceBackgroundPatternColor.IsValid)
-                message += "Цвет штриховки задней поверхности. ";
+                messagesList.Add(MyStrings.SurfaceBackgroundHatchDisable);
 
-            if(ogs.SurfaceForegroundPatternId.IntegerValue != invalidId)
-                message += "Штриховка передней поверхности. ";
+            if (ogs.SurfaceForegroundPatternColor.IsValid)
+                messagesList.Add(MyStrings.SurfaceForegroundHatchColor);
+            if (ogs.SurfaceBackgroundPatternColor.IsValid)
+                messagesList.Add(MyStrings.SurfaceBackgroundHatchColor);
+
+            if (ogs.SurfaceForegroundPatternId.IntegerValue != invalidId)
+                messagesList.Add(MyStrings.SurfaceForegroundHatchPattern);
             if (ogs.SurfaceBackgroundPatternId.IntegerValue != invalidId)
-                message += "Штриховка задней поверхности. ";
+                messagesList.Add(MyStrings.SurfaceBackgroundHatchPattern);
 
             if (ogs.IsCutForegroundPatternVisible == false)
-                message += "Отключена передняя штриховка разреза. ";
+                messagesList.Add(MyStrings.SectionForegroundHatchDisable);
             if (ogs.IsCutBackgroundPatternVisible == false)
-                message += "Отключена задняя штриховка разреза. ";
+                messagesList.Add(MyStrings.SectionBackgroundHatchDisable);
 
             if (ogs.CutForegroundPatternColor.IsValid)
-                message += "Цвет передней штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionForegroundHatchColor);
             if (ogs.CutBackgroundPatternColor.IsValid)
-                message += "Цвет задней штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionBackgroundHatchColor);
 
             if (ogs.CutForegroundPatternId.IntegerValue != invalidId)
-                message += "Образец передней штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionForegroundHatchPattern);
             if (ogs.CutBackgroundPatternId.IntegerValue != invalidId)
-                message += "Образец передней штриховки разреза. ";
+                messagesList.Add(MyStrings.SectionBackgroundHatchPattern);
 #endif
 
             if (ogs.Transparency != 0)
-                message += "Прозрачность. ";
+                messagesList.Add(MyStrings.Transparency);
 
 
             if (ogs.CutLineWeight != -1)
-                message += "Толщина линии разреза. ";
+                messagesList.Add(MyStrings.SectionLineThickness);
 
             if (ogs.CutLineColor.IsValid)
-                message += "Цвет линии разреза. ";
+                messagesList.Add(MyStrings.SectionLineColor);
 
             if (ogs.CutLinePatternId.IntegerValue != invalidId)
-                message += "Тип линии разреза. ";
-                        
-            return message;
+                messagesList.Add(MyStrings.SectionLinePattern);
+
+            string msg = string.Join(", ", messagesList);
+            return msg;
         }
 
 

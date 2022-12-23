@@ -117,30 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+  <data name="ErrorNoElements" xml:space="preserve">
+    <value>Overriden elements are not found!</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="Halftones" xml:space="preserve">
+    <value>Halftones</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>948, 480</value>
+  <data name="ProjectionLineColor" xml:space="preserve">
+    <value>Projection line color</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ProjectionLinePattern" xml:space="preserve">
+    <value>Projection line pattern</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form2</value>
+  <data name="ProjectionLineThickness" xml:space="preserve">
+    <value>Projection line weight</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Element with overriden graphics (double-clock to select element)</value>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ru-RU</value>
-  </metadata>
+  <data name="SectionBackgroundHatchColor" xml:space="preserve">
+    <value>Section background hatch color</value>
+  </data>
+  <data name="SectionBackgroundHatchDisable" xml:space="preserve">
+    <value>Section background hatch disable</value>
+  </data>
+  <data name="SectionBackgroundHatchPattern" xml:space="preserve">
+    <value>Section background hatch pattern</value>
+  </data>
+  <data name="SectionForegroundHatchColor" xml:space="preserve">
+    <value>Section foreground hatch color</value>
+  </data>
+  <data name="SectionForegroundHatchDisable" xml:space="preserve">
+    <value>Section foreground hatch disable</value>
+  </data>
+  <data name="SectionForegroundHatchPattern" xml:space="preserve">
+    <value>Section foreground hatch pattern</value>
+  </data>
+  <data name="SectionHatchColor" xml:space="preserve">
+    <value>Section hatch color</value>
+  </data>
+  <data name="SectionHatchDisable" xml:space="preserve">
+    <value>Section hatch disable</value>
+  </data>
+  <data name="SectionHatchPattern" xml:space="preserve">
+    <value>Section hatch pattern</value>
+  </data>
+  <data name="SectionLineColor" xml:space="preserve">
+    <value>Section line color</value>
+  </data>
+  <data name="SectionLinePattern" xml:space="preserve">
+    <value>Section line pattern</value>
+  </data>
+  <data name="SectionLineThickness" xml:space="preserve">
+    <value>Section line weight</value>
+  </data>
+  <data name="Sheet" xml:space="preserve">
+    <value>Sheet</value>
+  </data>
+  <data name="SurfaceBackgroundHatchColor" xml:space="preserve">
+    <value>Surface background hatch color</value>
+  </data>
+  <data name="SurfaceBackgroundHatchDisable" xml:space="preserve">
+    <value>Surface background hatch disable</value>
+  </data>
+  <data name="SurfaceBackgroundHatchPattern" xml:space="preserve">
+    <value>Surface background hatch pattern</value>
+  </data>
+  <data name="SurfaceForegroundHatchColor" xml:space="preserve">
+    <value>Surface foreground hatch color</value>
+  </data>
+  <data name="SurfaceForegroundHatchDisable" xml:space="preserve">
+    <value>Surface foreground hatch disable</value>
+  </data>
+  <data name="SurfaceForegroundHatchPattern" xml:space="preserve">
+    <value>Surface foreground hatch pattern</value>
+  </data>
+  <data name="SurfaceHatchColor" xml:space="preserve">
+    <value>Surface hatch color</value>
+  </data>
+  <data name="SurfaceHatchDisable" xml:space="preserve">
+    <value>Surface hatch disable</value>
+  </data>
+  <data name="SurfaceHatchPattern" xml:space="preserve">
+    <value>Surface hatch pattern</value>
+  </data>
+  <data name="Transparency" xml:space="preserve">
+    <value>Transparency</value>
+  </data>
 </root>

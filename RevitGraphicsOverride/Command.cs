@@ -49,7 +49,7 @@ namespace RevitGraphicsOverride
                 if (sheetNumber != "---")
                 {
                     string sheetName = curView.get_Parameter(BuiltInParameter.VIEWPORT_SHEET_NAME).AsString();
-                    title = "Лист: " + sheetNumber + " - " + sheetName + "; " + curView.Name;
+                    title = MyStrings.Sheet +  ": " + sheetNumber + " - " + sheetName + "; " + curView.Name;
                 }
                 Debug.WriteLine("Sheet number: " + sheetNumber);
                 List<OverridenResult> overridenElems = SupportGraphics.getOverridenElemsOnView(doc, curView);
@@ -58,7 +58,7 @@ namespace RevitGraphicsOverride
             }
             else
             {
-                Debug.WriteLine("Searchall project");
+                Debug.WriteLine("Search entire project");
                 List<ViewSheet> sheets = new FilteredElementCollector(doc)
                     .OfClass(typeof(ViewSheet))
                     .Cast<ViewSheet>()
@@ -85,7 +85,7 @@ namespace RevitGraphicsOverride
             Debug.WriteLine("Views with overrides: " + resultsOnSheets.Count);
             if (resultsOnSheets.Count == 0)
             {
-                TaskDialog.Show("Отчет", "Элементы с переопределением графики не обнаружены!");
+                TaskDialog.Show(MyStrings.Report, MyStrings.ErrorNoElements);
                 return Result.Cancelled;
             }
 

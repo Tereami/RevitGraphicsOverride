@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButtonCurrentVIew = new System.Windows.Forms.RadioButton();
             this.radioButtonAllProject = new System.Windows.Forms.RadioButton();
@@ -42,109 +43,72 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.radioButtonCurrentVIew);
             this.groupBox1.Controls.Add(this.radioButtonAllProject);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(220, 67);
-            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Поиск переопределений:";
             // 
             // radioButtonCurrentVIew
             // 
-            this.radioButtonCurrentVIew.AutoSize = true;
-            this.radioButtonCurrentVIew.Location = new System.Drawing.Point(6, 42);
+            resources.ApplyResources(this.radioButtonCurrentVIew, "radioButtonCurrentVIew");
+            this.radioButtonCurrentVIew.Checked = true;
             this.radioButtonCurrentVIew.Name = "radioButtonCurrentVIew";
-            this.radioButtonCurrentVIew.Size = new System.Drawing.Size(118, 17);
-            this.radioButtonCurrentVIew.TabIndex = 1;
-            this.radioButtonCurrentVIew.Text = "По текущему виду";
+            this.radioButtonCurrentVIew.TabStop = true;
             this.radioButtonCurrentVIew.UseVisualStyleBackColor = true;
             // 
             // radioButtonAllProject
             // 
-            this.radioButtonAllProject.AutoSize = true;
-            this.radioButtonAllProject.Checked = true;
-            this.radioButtonAllProject.Location = new System.Drawing.Point(6, 19);
+            resources.ApplyResources(this.radioButtonAllProject, "radioButtonAllProject");
             this.radioButtonAllProject.Name = "radioButtonAllProject";
-            this.radioButtonAllProject.Size = new System.Drawing.Size(116, 17);
-            this.radioButtonAllProject.TabIndex = 0;
-            this.radioButtonAllProject.TabStop = true;
-            this.radioButtonAllProject.Text = "По всему проекту";
             this.radioButtonAllProject.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.checkBoxShowResults);
             this.groupBox2.Controls.Add(this.checkBoxSelectElements);
-            this.groupBox2.Location = new System.Drawing.Point(12, 85);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(220, 67);
-            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "После поиска:";
             // 
             // checkBoxShowResults
             // 
-            this.checkBoxShowResults.AutoSize = true;
+            resources.ApplyResources(this.checkBoxShowResults, "checkBoxShowResults");
             this.checkBoxShowResults.Checked = true;
             this.checkBoxShowResults.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowResults.Location = new System.Drawing.Point(6, 19);
             this.checkBoxShowResults.Name = "checkBoxShowResults";
-            this.checkBoxShowResults.Size = new System.Drawing.Size(100, 17);
-            this.checkBoxShowResults.TabIndex = 0;
-            this.checkBoxShowResults.Text = "Вывести отчёт";
             this.checkBoxShowResults.UseVisualStyleBackColor = true;
             // 
             // checkBoxSelectElements
             // 
-            this.checkBoxSelectElements.AutoSize = true;
-            this.checkBoxSelectElements.Location = new System.Drawing.Point(6, 42);
+            resources.ApplyResources(this.checkBoxSelectElements, "checkBoxSelectElements");
             this.checkBoxSelectElements.Name = "checkBoxSelectElements";
-            this.checkBoxSelectElements.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxSelectElements.TabIndex = 0;
-            this.checkBoxSelectElements.Text = "Выделить элементы";
             this.checkBoxSelectElements.UseVisualStyleBackColor = true;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCancel.Location = new System.Drawing.Point(12, 163);
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Отмена";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOk
             // 
-            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(157, 163);
+            resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 2;
-            this.buttonOk.Text = "Далее >>";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 198);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Шаг 1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
