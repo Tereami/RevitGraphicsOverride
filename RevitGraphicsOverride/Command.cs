@@ -111,9 +111,15 @@ namespace RevitGraphicsOverride
 
                 if (form2.DialogResult == System.Windows.Forms.DialogResult.Yes)
                 {
+#if R2017 || R2018 || R2019 || R2020 || R2021 || R2022 || R2023
+                    ElementId idToSelect = new ElementId((int)form2.idToSelect); //в версиях до 2024 можно приводить long к int
+                    ElementId idToOpen = new ElementId((int)form2.idViewToOpen);
+#else
                     ElementId idToSelect = new ElementId(form2.idToSelect);
-                    View overrideView = doc.GetElement(new ElementId(form2.idViewToOpen)) as View;
-                    Debug.WriteLine("Select by double click, id " + idToSelect.IntegerValue + ", view: " + overrideView.Name);
+                    ElementId idToOpen = new ElementId(form2.idViewToOpen);
+#endif
+                    View overrideView = doc.GetElement(idToOpen) as View;
+                    Debug.WriteLine($"Select by double click, id {idToSelect}, view: {overrideView.Name}");
                     uidoc.ActiveView = overrideView;
                     uidoc.Selection.SetElementIds(new List<ElementId> { idToSelect });
                 }

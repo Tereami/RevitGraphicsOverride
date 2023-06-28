@@ -18,8 +18,8 @@ namespace RevitGraphicsOverride
 {
     public partial class Form2 : Form
     {
-        public int idToSelect;
-        public int idViewToOpen;
+        public long idToSelect;
+        public long idViewToOpen;
 
         public Form2(Dictionary<string, List<OverridenResult>> resultsOnSheets)
         {
@@ -34,10 +34,10 @@ namespace RevitGraphicsOverride
         {
             BrightIdeasSoftware.OLVListItem curRow = this.treeListView.SelectedItem;
             var idElemCell = curRow.GetSubItem(1);
-            idToSelect = int.Parse(idElemCell.Text);
+            idToSelect = long.Parse(idElemCell.Text);
 
             var idViewCell = curRow.GetSubItem(3);
-            idViewToOpen = int.Parse(idViewCell.Text);
+            idViewToOpen = long.Parse(idViewCell.Text);
 
             this.DialogResult = DialogResult.Yes;
             this.Close();
@@ -118,9 +118,9 @@ namespace RevitGraphicsOverride
                 foreach(OverridenResult res in kvp.Value)
                 {
                     string colElemName = res.Elem.Name;
-                    string colElemId = res.Elem.Id.IntegerValue.ToString();
+                    string colElemId = res.Elem.Id.ToString();
                     string colDescription = res.description;
-                    string colViewId = res.ParentView.Id.IntegerValue.ToString();
+                    string colViewId = res.ParentView.Id.ToString();
                     parent.Children.Add(new Node(colElemName, colElemId, colDescription, colViewId));
                 }
                 

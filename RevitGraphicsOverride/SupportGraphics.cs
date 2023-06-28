@@ -21,7 +21,7 @@ namespace RevitGraphicsOverride
     {
         public static string HaveOverrides(OverrideGraphicSettings ogs)
         {
-            int invalidId = OverrideGraphicSettings.InvalidPenNumber;
+            long invalidId = OverrideGraphicSettings.InvalidPenNumber;
             List<string> messagesList = new List<string>();
 
             if (ogs.Halftone == true)
@@ -33,7 +33,7 @@ namespace RevitGraphicsOverride
             if (ogs.ProjectionLineColor.IsValid)
                 messagesList.Add(MyStrings.ProjectionLineColor);
 
-            if (ogs.ProjectionLinePatternId.IntegerValue != invalidId)
+            if (ogs.ProjectionLinePatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.ProjectionLinePattern);
 
 #if R2017 || R2018
@@ -66,9 +66,9 @@ namespace RevitGraphicsOverride
             if (ogs.SurfaceBackgroundPatternColor.IsValid)
                 messagesList.Add(MyStrings.SurfaceBackgroundHatchColor);
 
-            if (ogs.SurfaceForegroundPatternId.IntegerValue != invalidId)
+            if (ogs.SurfaceForegroundPatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.SurfaceForegroundHatchPattern);
-            if (ogs.SurfaceBackgroundPatternId.IntegerValue != invalidId)
+            if (ogs.SurfaceBackgroundPatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.SurfaceBackgroundHatchPattern);
 
             if (ogs.IsCutForegroundPatternVisible == false)
@@ -81,9 +81,9 @@ namespace RevitGraphicsOverride
             if (ogs.CutBackgroundPatternColor.IsValid)
                 messagesList.Add(MyStrings.SectionBackgroundHatchColor);
 
-            if (ogs.CutForegroundPatternId.IntegerValue != invalidId)
+            if (ogs.CutForegroundPatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.SectionForegroundHatchPattern);
-            if (ogs.CutBackgroundPatternId.IntegerValue != invalidId)
+            if (ogs.CutBackgroundPatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.SectionBackgroundHatchPattern);
 #endif
 
@@ -97,7 +97,7 @@ namespace RevitGraphicsOverride
             if (ogs.CutLineColor.IsValid)
                 messagesList.Add(MyStrings.SectionLineColor);
 
-            if (ogs.CutLinePatternId.IntegerValue != invalidId)
+            if (ogs.CutLinePatternId.GetValue() != invalidId)
                 messagesList.Add(MyStrings.SectionLinePattern);
 
             string msg = string.Join(", ", messagesList);
@@ -122,7 +122,7 @@ namespace RevitGraphicsOverride
                 {
                     OverridenResult ores = new OverridenResult(elem, curView, ogs, msg);
                     overridenElems.Add(ores);
-                    Debug.WriteLine("Overrides found for elem id: " + elem.Id.IntegerValue);
+                    Debug.WriteLine($"Overrides found for elem id: {elem.Id}");
                 }
             }
             Debug.WriteLine("Overriden elems found: " + overridenElems.Count);
