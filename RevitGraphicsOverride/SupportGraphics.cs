@@ -108,7 +108,7 @@ namespace RevitGraphicsOverride
         public static List<OverridenResult> getOverridenElemsOnView(Document doc, View curView)
         {
             List<OverridenResult> overridenElems = new List<OverridenResult>();
-            Debug.WriteLine("Find overrides on view: " + curView.Name);
+            Trace.WriteLine("Find overrides on view: " + curView.Name);
 
             FilteredElementCollector col = new FilteredElementCollector(doc, curView.Id);
             foreach (Element elem in col)
@@ -122,10 +122,10 @@ namespace RevitGraphicsOverride
                 {
                     OverridenResult ores = new OverridenResult(elem, curView, ogs, msg);
                     overridenElems.Add(ores);
-                    Debug.WriteLine($"Overrides found for elem id: {elem.Id}");
+                    Trace.WriteLine($"Overrides found for elem id: {elem.Id}");
                 }
             }
-            Debug.WriteLine("Overriden elems found: " + overridenElems.Count);
+            Trace.WriteLine("Overriden elems found: " + overridenElems.Count);
             return overridenElems;
         }
     }
